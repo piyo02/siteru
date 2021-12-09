@@ -24,23 +24,29 @@ class SectorObserver
     public function creating(Sector $sector)
     {
         $request = Request::all();
-        $image_structure = Request::file('structure');
-        $slug = \Str::slug($sector->name, '-');
-        
-        $filename = $slug . '.html';
-        
-        $sector->slug = $slug;
-        if( $image_structure ){
-            $sector->structure = $image_structure->store('images/structures');
-        }
-        if( Storage::disk('local')->put("public/uploads/sectors/programs/$filename", $request['program']) ){
-            $sector->program = "public/uploads/sectors/programs/$filename";
-        }
-        if( Storage::disk('local')->put("public/uploads/sectors/jobs/$filename", $request['job']) ){
-            $sector->job     = "public/uploads/sectors/jobs/$filename";
-        }
-        if( Storage::disk('local')->put("public/uploads/sectors/purposes/$filename", $request['purpose']) ){
-            $sector->purpose = "public/uploads/sectors/purposes/$filename";
+        if( $request ){
+            $image_structure = Request::file('structure');
+            $icon = Request::file('icon');
+            $slug = \Str::slug($sector->name, '-');
+            
+            $filename = $slug . '.html';
+            
+            $sector->slug = $slug;
+            if( $image_structure ){
+                $sector->structure = $image_structure->store('images/structures');
+            }
+            if( $icon ){
+                $sector->icon = $icon->store('images/configs');
+            }
+            if( Storage::disk('local')->put("public/uploads/sectors/programs/$filename", $request['program']) ){
+                $sector->program = "public/uploads/sectors/programs/$filename";
+            }
+            if( Storage::disk('local')->put("public/uploads/sectors/jobs/$filename", $request['job']) ){
+                $sector->job     = "public/uploads/sectors/jobs/$filename";
+            }
+            if( Storage::disk('local')->put("public/uploads/sectors/purposes/$filename", $request['purpose']) ){
+                $sector->purpose = "public/uploads/sectors/purposes/$filename";
+            }
         }
         // dd( $sector );
     }

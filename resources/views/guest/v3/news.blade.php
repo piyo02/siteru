@@ -18,7 +18,7 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ $news->title }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ $news->date }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ strftime('%A %d %b %Y', strtotime($news->date)) }}</h6>
             <p class="card-text mt-4">{{ $news->description }}</p>
           </div>
           <div class="card-footer">

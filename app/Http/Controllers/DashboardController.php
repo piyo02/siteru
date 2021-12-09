@@ -7,7 +7,7 @@ use App\Models\News;
 use App\Models\Policy;
 use App\Models\Sector;
 use App\Models\User;
-use App\Models\ViolationLetter;
+use App\Models\Violation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,7 +30,7 @@ class DashboardController extends Controller
                 'galeri'    => Gallery::count(),
                 'kebijakan' => Policy::count(),
                 'user'      => User::count(),    
-                'pelanggaran'=> ViolationLetter::count(),    
+                'pelanggaran'=> Violation::count(),    
             ],
             'news' => $news,
             'galleries' => $galleries,

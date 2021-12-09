@@ -64,25 +64,34 @@
                                         @enderror
                                     </div>
                                 </div>
-                                @if (isset($gallery))
-                                <div class="form-group">
-                                    <img src="{{ asset('storage') . '/' . $gallery->thumbnail }}" class="col-lg-5 img-fluid">
-                                </div>
-                                @endif
-                                <div class="form-group">
-                                    <label for="thumbnail">Thumbnail Galeri</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail">
-                                            <label class="custom-file-label" for="thumbnail">Pilih File</label>
+                                <div class="row">
+                                    <div class="col-sm-6 col-12">
+                                        <div class="form-group">
+                                            <label>Tanggal: {{ isset($gallery) ? $gallery->date : '' }}</label>
+                                            <div class="input-group date" id="date" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input" name="date" data-target="#date" value="{{ isset($news) ? $news->date : '' }}"/>
+                                                <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="thumbnail">Thumbnail Galeri</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail">
+                                                    <label class="custom-file-label" for="thumbnail">Pilih File</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Isi Galeri</label>
-                                    <textarea id="file_gallery" name="file_gallery">
-                                        {{ old('file_gallery', isset($gallery) ? $gallery_content : '') }}
-                                    </textarea>
+                                    <div class="col-sm-6 col-12">
+                                        @if (isset($gallery))
+                                        <div class="form-group">
+                                            <img src="{{ asset('storage') . '/' . $gallery->thumbnail }}" class="col-lg-5 img-fluid">
+                                        </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer clearfix">

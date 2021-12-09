@@ -6,6 +6,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ConfigController;
@@ -14,11 +15,13 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ViolationController;
 use App\Http\Controllers\SubmissionController;
+
 use App\Http\Controllers\ContactTypeController;
 use App\Http\Controllers\UserProfileController;
-
 use App\Http\Controllers\SectorContactController;
+use App\Http\Controllers\InfrastructureController;
 use App\Http\Controllers\ViolationLetterController;
 
 /*
@@ -66,19 +69,11 @@ Route::middleware([Authenticate::class])->group(function() {
     Route::put('/admin/sector-contract/{sectorContact}', [SectorContactController::class, 'update'])->middleware('role.usector');
     Route::delete('/admin/sector-contract/{sectorContact}', [SectorContactController::class, 'destroy'])->middleware('role.usector');
 
-    Route::get('/admin/violations', [ViolationLetterController::class, 'index'])->middleware('role.task.force');
-    Route::get('/admin/violations/create', [ViolationLetterController::class, 'create'])->middleware('role.task.force');
-    Route::post('/admin/violations', [ViolationLetterController::class, 'store'])->middleware('role.task.force');
-    Route::get('/admin/violations/{violationLetter}', [ViolationLetterController::class, 'show'])->middleware('role.task.force');
-    Route::get('/admin/violations/{violationLetter}/edit', [ViolationLetterController::class, 'edit'])->middleware('role.task.force');
-    Route::put('/admin/violations/{violationLetter}', [ViolationLetterController::class, 'update'])->middleware('role.task.force');
-    Route::delete('/admin/violations/{violationLetter}', [ViolationLetterController::class, 'destroy'])->middleware('role.task.force');
-    Route::post('/admin/violations/add-signature/{violationLetter}', [ViolationLetterController::class, 'add_signature'])->middleware('role.task.force');
-    Route::post('/admin/violations/add-violation/{violationLetter}', [ViolationLetterController::class, 'add_violation'])->middleware('role.task.force');
-    Route::delete('/admin/violations/{violationLetter}/delete-violation/{violation}', [ViolationLetterController::class, 'delete_violation'])->middleware('role.task.force');
-    Route::post('/admin/violations/add-attachment/{violationLetter}', [ViolationLetterController::class, 'add_attachment'])->middleware('role.task.force');
-    Route::delete('/admin/violations/{violationLetter}/delete-attachment/{attachmentLetter}', [ViolationLetterController::class, 'delete_attachment'])->middleware('role.task.force');
-    Route::get('/admin/violations/export/{violationLetter}', [ViolationLetterController::class, 'export'])->middleware('role.task.force');
+    Route::resource('/admin/violations', ViolationController::class)->middleware('role.task.force');
+    Route::post('/admin/violations/add-signature/{violation}', [ViolationController::class, 'add_signature'])->middleware('role.task.force');
+    Route::post('/admin/violations/add-attachment/{violation}', [ViolationController::class, 'add_attachment'])->middleware('role.task.force');
+    Route::delete('/admin/violations/{violation}/delete-attachment/{attachment}', [ViolationController::class, 'delete_attachment'])->middleware('role.task.force');
+    Route::get('/admin/violations/export/{violation}', [ViolationController::class, 'export'])->middleware('role.task.force');
 
     // publication
     Route::resource('/admin/publication/news', NewsController::class)->middleware('role.usector');
@@ -86,9 +81,19 @@ Route::middleware([Authenticate::class])->group(function() {
     Route::resource('/admin/publication/policies', PolicyController::class)->middleware('role.usector');
 
     // master
-    // Route::resource('/admin/master/infrastructure', InfrastructureController::class)->middleware('role.uadmin');
+    Route::post('/admin/master/regions', [TeamController::class, 'store_region'])->middleware('role.uadmin');
+    Route::put('/admin/master/regions/{region}', [TeamController::class, 'update_region'])->middleware('role.uadmin');
+    Route::get('/admin/master/regions/{region}', [TeamController::class, 'show_region'])->middleware('role.uadmin');
+    Route::delete('/admin/master/regions/{region}', [TeamController::class, 'destroy_region'])->middleware('role.uadmin');
+    
+    Route::post('/admin/master/coordinates', [TeamController::class, 'store_coordinate'])->middleware('role.uadmin');
+    Route::put('/admin/master/coordinates/{regionCoordinate}', [TeamController::class, 'update_coordinate'])->middleware('role.uadmin');
+    Route::delete('/admin/master/coordinates/{regionCoordinate}', [TeamController::class, 'destroy_coordinate'])->middleware('role.uadmin');
+
+    Route::resource('/admin/master/infrastructure', InfrastructureController::class)->middleware('role.uadmin');
     Route::resource('/admin/master/roles', RoleController::class)->middleware('role.admin');
     Route::resource('/admin/master/users', UserController::class)->middleware('role.uadmin');
+    Route::resource('/admin/master/teams', TeamController::class)->middleware('role.uadmin');
     Route::get('/admin/master/configs', [ConfigController::class, 'index'])->middleware('role.uadmin');
     Route::put('/admin/master/configs/{config}', [ConfigController::class, 'update'])->middleware('role.uadmin');
     Route::resource('/admin/maps', MapController::class)->middleware('role.uadmin');

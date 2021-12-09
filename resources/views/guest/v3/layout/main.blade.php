@@ -34,6 +34,7 @@
 </head>
 
 <body>
+  <?php setlocale(LC_TIME, 'id_ID.utf8'); ?>
 
   @include('guest.v3.layout.header')
   @if (Request::is('/'))

@@ -51,19 +51,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($violation_letters as $violationLetter)
+                                    @foreach ($violations as $violation)
                                     <tr>
                                         <td>{{ request()->query('page') ? $loop->iteration + ((request()->query('page')-1)*10) : $loop->iteration }}</td>
-                                        <td>{{ $violationLetter->number }}</td>
-                                        <td>{{ $violationLetter->regarding }}</td>
-                                        <td>{{ $violationLetter->offender }}</td>
+                                        <td>{{ $violation->number }}</td>
+                                        <td>{{ $violation->regarding }}</td>
+                                        <td>{{ $violation->offender }}</td>
                                         <td>
-                                            <a href="/admin/violations/{{ $violationLetter->id }}/edit" class="btn btn-sm btn-default">
+                                            <a href="/admin/violations/{{ $violation->id }}/edit" class="btn btn-sm btn-default">
                                                 <i class="fas fa-eye mr-1"></i>
                                                 Detail
                                             </a>
 
-                                            <a href="/admin/violations/export/{{ $violationLetter->id }}" class="btn btn-sm btn-success">
+                                            <a href="/admin/violations/export/{{ $violation->id }}" class="btn btn-sm btn-success">
                                                 <i class="fas fa-file-pdf mr-1"></i>
                                                 Export PDF
                                             </a>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="card-footer clearfix">
                             <ul class="pagination pagination-sm m-0 float-right">
-                                {{ $violation_letters->links() }}
+                                {{ $violations->links() }}
                             </ul>
                         </div>
                     </div>

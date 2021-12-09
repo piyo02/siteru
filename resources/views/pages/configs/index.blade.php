@@ -243,6 +243,71 @@
                         </div>
                         @endforeach
                     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="col-12">
+                                <h5>Daftar Video</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">No.</th>
+                                        <th>Path Video</th>
+                                        <th>Deskripsi Video</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($videos as $config)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $config->value }}</td>
+                                            <td>{{ $config->field }}</td>
+                                            <td>
+                                                <button type="button" data-toggle="modal" data-target="#edit-video-{{ $config->id }}" class="btn btn-sm btn-success">
+                                                    <i class="fas fa-pencil-alt mr-1"></i>
+                                                    Edit
+                                                </button>
+                                                <div class="modal fade" id="edit-video-{{ $config->id }}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form action="/admin/master/configs/{{ $config->id }}" method="post">
+                                                                @method('put')
+                                                                @csrf
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Edit {{ $page }}</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label for="value">Path Video</label>
+                                                                        <input type="text" class="form-control" id="value" name="value" placeholder="Path Video" value="{{ $config->value }}">
+                                                                        <input type="hidden" class="form-control" id="type" name="type" placeholder="Path Video" value="video">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="field">Deskripsi Video</label>
+                                                                        <input type="text" class="form-control" id="field" name="field" placeholder="Deskripsi Video" value="{{ $config->field }}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer justify-content-between">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -55,16 +55,17 @@
                                         <td>{{ request()->query('page') ? $loop->iteration + ((request()->query('page')-1)*10) : $loop->iteration }}</td>
                                         <td>
                                             {{ $gallery->title }}<br>
-                                            <button class="btn btn-sm btn-default">{{ $gallery->sector->name }}</button>
+                                            <button class="btn btn-sm btn-default">{{ $gallery->sector->name }}</button><br>
+                                            <button class="btn btn-sm">{{ strftime('%A %d %b %Y', strtotime($gallery->date)) }}</button>
                                         </td>
                                         <td>
                                             <img src="{{ asset('storage') . '/' . $gallery->thumbnail  }}" class="img-fluid" width="150px">
                                         </td>
                                         <td>
-                                            <a href="/admin/publication/galleries/{{ $gallery->id }}" class="btn btn-sm btn-info">
+                                            {{-- <a href="/admin/publication/galleries/{{ $gallery->id }}" class="btn btn-sm btn-info">
                                                 <i class="fas fa-eye mr-1"></i>
                                                 Detail
-                                            </a>
+                                            </a> --}}
                                             <a href="/admin/publication/galleries/{{ $gallery->id }}/edit" class="btn btn-sm btn-success">
                                                 <i class="fas fa-pencil-alt mr-1"></i>
                                                 Edit

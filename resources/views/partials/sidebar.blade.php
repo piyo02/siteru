@@ -46,7 +46,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href={{ url("/admin/publication/galleries") }} class="nav-link {{ Request::is("admin/publication/galleries") ? 'active' : '' }}">
+                            <a href={{ url("/admin/publication/galleries") }} class="nav-link {{ Request::is("admin/publication/galleries*") ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Galeri</p>
                             </a>
@@ -95,6 +95,12 @@
                             <a href={{ url("/admin/master/users") }} class="nav-link {{ Request::is("admin/master/users*") ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href={{ url("/admin/master/teams") }} class="nav-link {{ Request::is("admin/master/teams*") ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tim</p>
                             </a>
                         </li>
                         @admin

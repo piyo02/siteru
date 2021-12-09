@@ -57,17 +57,37 @@
                                         {{ old('purpose', isset($sector) ? $purpose_content : '') }}
                                     </textarea>
                                 </div>
-                                @if (isset($sector))
-                                <div class="form-group">
-                                    <img src="{{ asset('storage') . '/' . $sector->structure }}" class="col-lg-5 img-fluid">
-                                </div>
-                                @endif
-                                <div class="form-group">
-                                    <label for="structure">Struktur Organisasi (Gambar)</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="structure" name="structure">
-                                            <label class="custom-file-label" for="structure">Pilih File</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @if (isset($sector))
+                                        <div class="form-group">
+                                            <img src="{{ asset('storage') . '/' . $sector->structure }}" class="col-lg-5 img-fluid">
+                                        </div>
+                                        @endif
+                                        <div class="form-group">
+                                            <label for="structure">Struktur Organisasi (Gambar)</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="structure" name="structure">
+                                                    <label class="custom-file-label" for="structure">Pilih File</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @if (isset($sector))
+                                        <div class="form-group">
+                                            <img src="{{ asset('storage') . '/' . $sector->icon }}" width="130px" class="img-fluid">
+                                        </div>
+                                        @endif
+                                        <div class="form-group">
+                                            <label for="icon">Ikon Organisasi</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="icon" name="icon">
+                                                    <label class="custom-file-label" for="icon">Pilih File</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

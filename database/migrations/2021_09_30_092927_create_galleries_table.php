@@ -19,7 +19,6 @@ class CreateGalleriesTable extends Migration
             $table->string('slug');
             $table->date('date');
             $table->string('title');
-            // $table->string('file')->default('uploads/galleries/gallery.html');
 
             $table->bigInteger('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users');

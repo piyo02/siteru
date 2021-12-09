@@ -25,6 +25,7 @@ class ConfigController extends Controller
         $str_org = Config::where('shortcode', 'STR-ORG')->first();
 
         $slides = Config::where('shortcode', 'like', 'SLD%')->get();
+        $videos = Config::where('shortcode', 'like', 'VD')->get();
         return view('pages.configs.index', [
             'page'              => 'Master Configuration',
             'name'              => $name,
@@ -38,6 +39,7 @@ class ConfigController extends Controller
             'mt_lbg_content'    => file_get_contents(\storage_path('app/'.$mt_lbg->value)),
             'str_org'           => $str_org,
             'slides'            => $slides,
+            'videos'            => $videos,
         ]); 
     }
 
@@ -54,6 +56,9 @@ class ConfigController extends Controller
             }
         } else if( $type == 'default' ){
             $validatedData['value'] = $request->value;
+        } else if( $type == 'video' ){
+            $validatedData['value'] = $request->value;
+            $validatedData['field'] = $request->field;
         }
 
         if( isset( $validatedData ) && $validatedData != NULL ){

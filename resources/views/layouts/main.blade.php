@@ -38,6 +38,7 @@
             <img class="animation__shake" src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
         </div> --}}
 
+        <?php setlocale(LC_TIME, 'id_ID.utf8'); ?>
         @include('partials.navbar')
 
         @include('partials.sidebar')

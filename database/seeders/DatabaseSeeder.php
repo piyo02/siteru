@@ -30,27 +30,15 @@ class DatabaseSeeder extends Seeder
         ]);
         ContactType::create([               //Instagram
             'type' => 'Instagram',
-            'icon' => 'images/icons/instagram.svg',
-        ]);
-        ContactType::create([               //Twitter
-            'type' => 'Twitter',
-            'icon' => 'images/icons/twitter.svg',
+            'icon' => 'images/icons/instagram.png',
         ]);
         ContactType::create([               //Facebook
             'type' => 'Facebook',
-            'icon' => 'images/icons/facebook.svg',
-        ]);
-        ContactType::create([               //Telegram
-            'type' => 'Telegram',
-            'icon' => 'images/icons/telegram.svg',
+            'icon' => 'images/icons/facebook.png',
         ]);
         ContactType::create([               //YouTube
             'type' => 'YouTube',
-            'icon' => 'images/icons/youtube.svg',
-        ]);
-        ContactType::create([               //Whatsapp
-            'type' => 'Whatsapp',
-            'icon' => 'images/icons/whatsapp.svg',
+            'icon' => 'images/icons/youtube.png',
         ]);
 
         Role::create([                      //admin
@@ -163,6 +151,17 @@ class DatabaseSeeder extends Seeder
             'shortcode' => 'SLD-3',
             'field'     => 'Slide 3',
             'value'     => 'images/configs/slide-3.png',
+        ]);
+
+        Config::create([
+            'shortcode' => 'VD',
+            'field'     => 'Pedestrian Kota Kendari',
+            'value'     => 'uploads/videos/Pedestrian Kota Kendari.mp4',
+        ]);
+        Config::create([
+            'shortcode' => 'VD',
+            'field'     => 'Taman Cinta Kendari',
+            'value'     => 'uploads/videos/Taman Cinta Kendari.mp4',
         ]);
 
         Official::create([

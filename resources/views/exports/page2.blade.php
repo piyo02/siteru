@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $violation_letter->number }}</title>
+    <title>{{ $violation->number }}</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> --}}
@@ -43,8 +43,8 @@
         <h1><U>LAMPIRAN</U></h1>
     </div>
     
-    @foreach ($attachment_letters as $attachment_letter)
-        <img src="{{ public_path('storage') . '/' . $attachment_letter->attachment }}" width="400px" style="margin: 0 60px 30px 0">
+    @foreach ($attachments as $attachment)
+        <img src="{{ public_path('storage') . '/' . $attachment->attachment }}" width="400px" style="margin: 0 60px 30px 0">
     @endforeach
 
     

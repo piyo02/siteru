@@ -45,7 +45,7 @@
           <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item filter-app">
             <img src="{{ asset('storage' . '/' . $gallery->thumbnail) }}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>{{ $gallery->title }}</h4>
+              <h4>{{ strftime('%A %d %b %Y', strtotime($gallery->date)) }}</h4>
               <p>{{ $gallery->sector->name }}</p>
               <br>
               {{-- <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a> --}}

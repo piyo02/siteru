@@ -147,6 +147,9 @@ class SectorController extends Controller
         if( $request->file('structure') ){
             $validatedData['structure'] = $request->file('structure')->store('images/structures');
         }
+        if( $request->file('icon') ){
+            $validatedData['icon'] = $request->file('icon')->store('images/configs');
+        }
         // upload
         if( Storage::disk('local')->put("public/uploads/sectors/programs/$filename", $request->program) ){
             $validatedData['program'] = "public/uploads/sectors/programs/$filename";

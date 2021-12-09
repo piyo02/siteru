@@ -12,17 +12,17 @@ class GalleryObserver
     {
         $request = Request::all();
         $image_thumbnail = Request::file('thumbnail');
-        $slug = \Str::slug($gallery->title, '-');
+        // $slug = \Str::slug($gallery->title, '-');
         
-        $filename = $slug . '.html';
-        $gallery->slug = $slug;
+        // $filename = $slug . '.html';
+        // $gallery->slug = $slug;
         if( $image_thumbnail ){
             $gallery->thumbnail = $image_thumbnail->store('images/publish/galleries');
         }
-        $path = "public/uploads/galleries/$filename";
-        if( Storage::disk('local')->put($path, $request['file_gallery']) ){
-            $gallery->file = $path;
-        }
+        // $path = "public/uploads/galleries/$filename";
+        // if( Storage::disk('local')->put($path, $request['file_gallery']) ){
+        //     $gallery->file = $path;
+        // }
     }
 
     
@@ -32,9 +32,9 @@ class GalleryObserver
             if( $gallery->thumbnail != 'images/publish/galleries/galleries.jpg' ){
                 Storage::delete( $gallery->thumbnail );
             }
-            if( $gallery->file != 'public/uploads/galleries/galleries.html' ){
-                unlink( \storage_path( 'app/' . $gallery->file ) );
-            }
+            // if( $gallery->file != 'public/uploads/galleries/galleries.html' ){
+            //     unlink( \storage_path( 'app/' . $gallery->file ) );
+            // }
         } catch (\Exception $exception) {
             $message = 'Gagal Menghapus File "' . $gallery->title;
         }

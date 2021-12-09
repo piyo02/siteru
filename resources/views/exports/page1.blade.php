@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $violation_letter->number }}</title>
+    <title>{{ $violation->number }}</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -44,9 +44,9 @@
         <tr>
             <td width="80px">Nomor</td>
             <td width="10px">:</td>
-            <td width="270px">{{ $violation_letter->number }}</td>
+            <td width="270px">{{ $violation->number }}</td>
             <td></td>
-            <td><span style="margin-left: 240px;">Yth. Sdr(i) {{ $violation_letter->offender }}</span></td>
+            <td><span style="margin-left: 240px;">Yth. Sdr(i) {{ $violation->offender }}</span></td>
         </tr>
         <tr>
             <td width="80px">Lampiran</td>
@@ -58,7 +58,7 @@
         <tr>
             <td width="80px">Perihal</td>
             <td width="10px">:</td>
-            <td width="270px"><b><u>{{ $violation_letter->regarding }}</u></b></td>
+            <td width="270px"><b><u>{{ $regards[$violation->warn-1] }}</u></b></td>
             <td></td>
             <td><span style="margin-left: 250px;"><b><u>T e m p a t</u></b></span></td>
         </tr>
@@ -76,8 +76,8 @@
         </ol>
         <span>Berdasarkan hasil pemantauan dan pemeriksaan Petugas Pengendalian Pemanfaatan Ruang, bahwa Aktifitas Pembangunan Saudara(i) melanggar Undang-Undang Pemanfaatan Ruang tersebut diatas, yaitu :</span>
         <ol>
-            @foreach ($violations as $violation)
-                <li>{{ $violation->description }}</li>
+            @foreach ($violations as $vio)
+                <li>{{ $vio }}</li>
             @endforeach
         </ol>
         <span>Pada lokasi dimaksud sebagai berikut :</span>
@@ -85,22 +85,22 @@
             <tr>
                 <td width="200px">Kegiatan Pembangunan</td>
                 <td width="10px">:</td>
-                <td>{{ $violation_letter->activity }}</td>
+                <td>{{ $violation->activity }}</td>
             </tr>
             <tr>
                 <td width="200px">Jalan</td>
                 <td width="10px">:</td>
-                <td>{{ $violation_letter->street }}</td>
+                <td>{{ $violation->street }}</td>
             </tr>
             <tr>
                 <td width="200px">Kelurahan</td>
                 <td width="10px">:</td>
-                <td>{{ $violation_letter->village }}</td>
+                <td>{{ $violation->village }}</td>
             </tr>
             <tr>
                 <td width="200px">Kecamatan</td>
                 <td width="10px">:</td>
-                <td>{{ $violation_letter->districts }}</td>
+                <td>{{ $violation->districts }}</td>
             </tr>
         </table>
         <span>Untuk menghindari adanya kerugian Saudara(i) yang lebih besar, diminta untuk segera menghentikan kegiatan pembangunan fisik apa pun sebelum memiliki izin pemanfaatan ruang dan/atau mendapat persetujuan dari Pemerintah Kota Kendari dan segera memenuhi Teguran/Panggilan ini pada Kantor Dinas PUPR Kota Kendari dengan membawa serta Teguran/Panggilan ini dan surat-surat pendukung lainnya pada :</span>
@@ -136,19 +136,19 @@
         </tr>
         <tr>
             <td width="50%" class="text-center">
-                <img src="{{ public_path('storage') . '/' . $violation_letter->signature }}" height="80px">
+                <img src="{{ public_path('storage') . '/' . $violation->signature }}" height="80px">
             </td>
             <td width="50%" class="text-center">
                 <img src="{{ public_path('storage') . '/' . $signature->value }}" height="80px">
             </td>
         </tr>
         <tr>
-            <td width="50%" class="text-center">{{ $violation_letter->offender }}</td>
-            <td width="50%" class="text-center"><b><u>{{ $violation_letter->name }}</u></b></td>
+            <td width="50%" class="text-center">{{ $violation->offender }}</td>
+            <td width="50%" class="text-center"><b><u>{{ $violation->name }}</u></b></td>
         </tr>
         <tr>
             <td width="50%" class="text-center"></td>
-            <td width="50%" class="text-center">{{ $violation_letter->employee_number }}</td>
+            <td width="50%" class="text-center">{{ $violation->employee_number }}</td>
         </tr>
     </table>
 
@@ -157,8 +157,8 @@
         <li>Kepala Dinas PUPR Kota Kendari di Kendari;</li>
         <li>Kasat. Pol. PP Kota Kendari di Kendari;</li>
         <li>Kepala Bagian Hukum dan HAM Setda Kota Kendari di Kendari;</li>
-        <li>Camat <u>{{ $violation_letter->village }}</u></li>
-        <li>Lurah <u>{{ $violation_letter->districts }}</u></li>
+        <li>Camat <u>{{ $violation->village }}</u></li>
+        <li>Lurah <u>{{ $violation->districts }}</u></li>
     </ol>
     <br><br>
     

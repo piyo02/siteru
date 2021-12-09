@@ -71,6 +71,7 @@ class GalleryController extends Controller
     {
         $validatedData = $request->validate([
             'sector_id' => 'required',
+            'date' => 'required',
             'title' => 'required',
             'thumbnail' => 'image|file|max:1024',
         ]);
@@ -80,6 +81,7 @@ class GalleryController extends Controller
             $validatedData['slug'] = $slug;
             $validatedData['created_by'] = auth()->user()->id;
             $validatedData['sector_id'] = $request->sector_id;
+            $validatedData['date'] = date('Y-m-d', strtotime($request->date));
 
             Gallery::create($validatedData);
             $status = 'success';

@@ -129,7 +129,7 @@
                                             <h5 class="btn-sm btn btn-default">{{ $gallery->sector->name }}</h5>
                                         </div>
                                         <div class="col-6">
-                                            <a href="/admin/publication/galleries/{{ $gallery->id }}" class="btn btn-default btn-sm"><i class="fas fa-eye mr-2"></i> Selengkapnya</a>
+                                            <button class="btn btn-default btn-sm">{{ strftime('%A %d %b %Y', strtotime($gallery->date)) }}</button>
                                         </div>
                                     </div>
                                 </div>
