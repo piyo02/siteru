@@ -93,6 +93,9 @@
             if( $('.value') ){
                 $('.value').summernote();
             }
+            if( $('.description_') ){
+                $('.description_').summernote();
+            }
         })
         
         var $datepicker = $('#date');

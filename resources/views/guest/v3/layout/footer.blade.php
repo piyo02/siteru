@@ -8,7 +8,7 @@
               <div class="col-lg-6">
                 <h4>Punya keresehan mengenai lingkungan Anda?</h4>
                 <p>Beritahu kami agar dapat kami tindak lanjuti</p>
-                <a href="#" class="btn btn-sm btn-primary">Ajukan Pengaduan</a>
+                <a href="https://eproksi.kendarikota.go.id/" class="btn btn-sm btn-primary">Ajukan Pengaduan</a>
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@
               <li><i class="bx bx-chevron-right"></i> <a href="/profil">Profil Kesekretariatan</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="/publikasi/berita">Berita</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="/publikasi/kebijakan">Kebijakan</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="www.pu.go.id">Pengaduan</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://eproksi.kendarikota.go.id/">Pengaduan</a></li>
             </ul>
           </div>
 

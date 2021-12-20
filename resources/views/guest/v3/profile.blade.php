@@ -6,7 +6,7 @@
       <div class="container" data-aos="fade-up">
         
         <div class="row text-center" style="color: #12306c;">
-          <h4>KEPALA DINAS PU KOTA KENDARI</h4>
+          <h4>DINAS PU KOTA KENDARI</h4>
         </div>
         <div class="row">
           <div class="col-md-8" data-aos="fade-right" data-aos-delay="100">

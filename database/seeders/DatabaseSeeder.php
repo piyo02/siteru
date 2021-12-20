@@ -66,7 +66,6 @@ class DatabaseSeeder extends Seeder
         Sector::factory(2)->create();        
         
         // sector_contact
-        // policies
 
         User::create([                      //alzidni2000@gmail.com
             'address'   => 'BTN GRAHA MANDIRI PERMAI BLOK K/7, Punggolaka, Puuwatu, Kendari, Sulawesi Tenggara 93115',
@@ -75,7 +74,6 @@ class DatabaseSeeder extends Seeder
             'name'      => 'Al Zidni Kasim',
             'password'  => \bcrypt('alzidni'),
             'phone'     => '081232578168',
-            // 'username'  => 'zidni',
             'role_id'   => 1,
             'sector_id' => 1,
         ]);
@@ -86,7 +84,6 @@ class DatabaseSeeder extends Seeder
             'name'      => 'User Admin',
             'password'  => \bcrypt('uadmin'),
             'phone'     => '081234567890',
-            // 'username'  => 'uadmin',
             'role_id'   => 2,
             'sector_id' => 1,
         ]);
@@ -97,11 +94,11 @@ class DatabaseSeeder extends Seeder
             'name'      => 'User Sector',
             'password'  => \bcrypt('usector'),
             'phone'     => '081234567890',
-            // 'username'  => 'usector',
             'role_id'   => 3,
             'sector_id' => 2,
         ]);
 
+        // profil kabid pr
         Config::create([
             'shortcode' => 'NM-KBD-PR',
             'field'     => 'Nama Kabid. Penataan Ruang',
@@ -117,6 +114,8 @@ class DatabaseSeeder extends Seeder
             'field'     => 'TTD Kabid. Penataan Ruang',
             'value'     => 'images/configs/ttd.png',
         ]);
+
+        // profil dinas pu
         Config::create([
             'shortcode' => 'VS-MS',
             'field'     => 'Visi dan Misi',
@@ -137,6 +136,8 @@ class DatabaseSeeder extends Seeder
             'field'     => 'Struktur Organisasi',
             'value'     => 'images/configs/structure.png',
         ]);
+
+        // silde beranda
         Config::create([
             'shortcode' => 'SLD-1',
             'field'     => 'Slide 1',
@@ -153,6 +154,7 @@ class DatabaseSeeder extends Seeder
             'value'     => 'images/configs/slide-3.png',
         ]);
 
+        // video beranda
         Config::create([
             'shortcode' => 'VD',
             'field'     => 'Pedestrian Kota Kendari',
@@ -164,20 +166,22 @@ class DatabaseSeeder extends Seeder
             'value'     => 'uploads/videos/Taman Cinta Kendari.mp4',
         ]);
 
-        Official::create([
-            'name'          => 'Ketua',
-            'image'         => 'images/officials/official.jpg',
-            'description'   => 'uploads/officials/official.html',
+        // type infrastruktur
+        Config::create([
+            'shortcode' => 'TP-INF',
+            'field'     => 'jalan',
+            'value'     => 'Jalan',
         ]);
-        Official::create([
-            'name'          => 'Wakil Ketua',
-            'image'         => 'images/officials/official.jpg',
-            'description'   => 'uploads/officials/official.html',
+        Config::create([
+            'shortcode' => 'TP-INF',
+            'field'     => 'jembatan',
+            'value'     => 'Jembatan',
+        ]);
+        Config::create([
+            'shortcode' => 'TP-INF',
+            'field'     => 'taman',
+            'value'     => 'Taman',
         ]);
 
-        // galleries
-        // Gallery::factory(17)->create();        
-        // news
-        // News::factory(22)->create(); 
     }
 }

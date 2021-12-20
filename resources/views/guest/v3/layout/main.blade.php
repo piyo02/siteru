@@ -28,6 +28,7 @@
   <link href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css"rel="stylesheet"/>
   <link href="{{ asset('assets/guest/vendor/leaflet/L.Control.ZoomBar.cs') }}s"rel="stylesheet"/>
   <link href="{{ asset('assets/guest/vendor/leaflet/Leaflet.Coordinates-0.1.5.cs') }}s"rel="stylesheet"/> 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css" rel="stylesheet">
 
 
   <link href="{{ asset('assets/guest/css/style.css') }}" rel="stylesheet">
@@ -74,6 +75,7 @@
   <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
   <script src="{{ asset('assets/guest/vendor/leaflet/L.Control.ZoomBar.js') }}"></script> 
   <script src="{{ asset('assets/guest/vendor/leaflet/Leaflet.Coordinates-0.1.5.min.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js"></script>
 
   <script src="{{ asset('assets/guest/js/main.js') }}"></script>
 

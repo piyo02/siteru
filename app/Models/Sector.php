@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Policy;
 use App\Models\Gallery;
 use App\Models\SectorContact;
+use App\Models\Infrastructure;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +24,9 @@ class Sector extends Model
     }
     public function news() {
         return $this->hasMany(News::class);
+    }
+    public function infrastructures() {
+        return $this->hasMany(Infrastructure::class);
     }
     public function policies() {
         return $this->hasMany(Policy::class);

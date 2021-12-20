@@ -9,4 +9,8 @@ class Config extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    
+    public function infrastructures() {
+        return $this->hasMany(Infrastructure::class);
+    }
 }

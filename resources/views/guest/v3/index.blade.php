@@ -2,6 +2,24 @@
 
 @section('content')
 
+<section>
+  <div class="container">
+    <div class="row justify-content-center">
+      @foreach ($videos as $video)
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card">
+          <video src="{{ asset('storage') . '/' . $video->value }}" style="max-width: 100%" controls></video>
+          <div class="card-body">
+            <p class="card-text">{{ $video->field }}</p>
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
+  </div>
+
+</section>
+
 <!-- ======= News Section ======= -->
 <section id="about" class="about section-bg">
   <div class="container" data-aos="fade-up">
@@ -35,31 +53,13 @@
     </div>
 </section> 
 
-<section>
-  <div class="container">
-    <div class="row justify-content-center">
-      @foreach ($videos as $video)
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card">
-          <video src="{{ asset('storage') . '/' . $video->value }}" style="max-width: 100%" controls></video>
-          <div class="card-body">
-            <p class="card-text">{{ $video->field }}</p>
-          </div>
-        </div>
-      </div>
-      @endforeach
-    </div>
-  </div>
-
-</section>
-
 @if (count($newses))
 <section id="featured-services" class="featured-services">
   <div class="container" data-aos="fade-up">
 
     <div class="row">
       @foreach ($newses as $news)
-      <div class="col-4">
+      <div class="col-lg-4 col-md-6 col-12 mb-3">
         <div class="card border-0">
           <div class="position-relative">
             <img src="{{ asset('storage' . '/' . $news->thumbnail) }}" alt="" class="img-fluid">
@@ -91,7 +91,7 @@
 <!-- End News -->
 
 <!-- ======= Testimonial Section ======= -->
-<section id="testimonials" class="testimonials">
+{{-- <section id="testimonials" class="testimonials">
   <div class="container" data-aos="zoom-in">
 
     <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -167,7 +167,7 @@
     </div>
 
   </div>
-</section>
+</section> --}}
 <!-- End Testimonial -->
 
 <!-- ======= Gallery Section ======= -->
@@ -217,7 +217,7 @@
     <div class="row justify-content-between">
       <?php $images = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'];?>
       @foreach ($sectors as $sector)
-      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
         <div class="member">
           <div class="member-img p-3 text-center pt-5">
             <img src="{{ asset('storage' . '/' . $sector->icon) }}" class="img-fluid" alt="" width="80px">
@@ -255,15 +255,16 @@
     <div class="row justify-content-center">
       <div class="col-xl-10">
         <ul class="faq-list">
-
+          @foreach ($faqs as $faq)
           <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Apa yang terjadi jika kita mengabaikan surat panggilan mengenai pelanggaran aturan pembangunan? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq{{$faq->id}}">{{ $faq->value }}<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div id="faq{{$faq->id}}" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Pelanggar akan menerima surat panggilan sebanyak 2 kali sebelum dilakukan pemberhentian paksa untuk pembangunan yang sedang dilakukan.
+                {{ $faq->field }}
               </p>
             </div>
           </li>
+          @endforeach
 
         </ul>
       </div>

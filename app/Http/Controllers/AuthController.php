@@ -22,7 +22,7 @@ class AuthController extends Controller
             return \redirect()->intended('/admin/dashboard');
         }
 
-        return back()->with('error', 'Gagal Login');
+        return back()->with('error', 'Gagal Login')->with('danger', 'gagal');
     }
 
     public function logout(Request $request) {

@@ -39,7 +39,7 @@
                                                 <div class="modal fade" id="create-infrastructure">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <form action="/admin/infrastructure" method="post"  enctype="multipart/form-data">
+                                                            <form action="/admin/infrastructure/list" method="post"  enctype="multipart/form-data">
                                                                 @csrf
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title">Tambah {{ $page }}</h4>
@@ -65,6 +65,14 @@
                                                                         <input type="text" class="form-control" id="duration" name="duration" placeholder="Lama Pengerjaan" required>
                                                                     </div>
                                                                     <div class="form-group">
+                                                                        <label for="long">Kordinat Long</label>
+                                                                        <input type="text" class="form-control" id="long" name="long" placeholder="Kordinat Long" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="lat">Kordinat Lat</label>
+                                                                        <input type="text" class="form-control" id="lat" name="lat" placeholder="Kordinat Lat" required>
+                                                                    </div>
+                                                                    <div class="form-group">
                                                                         <label for="image">Gambar Infrastruktur</label>
                                                                         <div class="input-group">
                                                                             <div class="custom-file">
@@ -77,21 +85,17 @@
                                                                         <label for="">Bidang</label>
                                                                         <select name="sector_id" id="sector_id" class="form-control">
                                                                             @foreach ($sectors as $sector)
-                                                                            <option value="{{ $sector->id }}">{{ $sector->name }}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="">Bidang</label>
-                                                                        <select name="type_id" id="type_id" class="form-control">
-                                                                            @foreach ($types as $type)
-                                                                            <option value="{{ $type->id }}">{{ $type->value }}</option>
+                                                                                @if (old('sector_id') == $sector->id)
+                                                                                    <option value="{{ $sector->id }}" selected>{{ $sector->name }}</option>
+                                                                                @else
+                                                                                    <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                                                                                @endif
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="">Deskripsi</label>
-                                                                        <textarea id="description" name="description" class="description_"></textarea>
+                                                                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Deskripsi" required></textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer justify-content-between">
@@ -126,20 +130,19 @@
                                         <td>
                                             <img src="{{ asset('storage') . '/' . $infrastructure->image  }}" class="img-fluid" width="150px">
                                         </td>
-                                        <td>
+                                        <td>        
                                             <button type="button" data-toggle="modal" data-target="#edit-infrastructure-{{ $infrastructure->id }}" class="btn btn-sm btn-success">
                                                 <i class="fas fa-pencil-alt mr-1"></i>
                                                 Edit
                                             </button>
-
                                             <div class="modal fade" id="edit-infrastructure-{{ $infrastructure->id }}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
-                                                        <form action="/admin/infrastructure/{{ $infrastructure->id }}" method="post"  enctype="multipart/form-data">
+                                                        <form action="/admin/infrastructure/list/{{ $infrastructure->id }}" method="post"  enctype="multipart/form-data">
                                                             @method('put')
                                                             @csrf
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Tambah {{ $page }}</h4>
+                                                                <h4 class="modal-title">Edit {{ $page }}</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -147,19 +150,27 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="name">Nama</label>
-                                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nama" required value="{{ $infrastructure->name }}">
+                                                                    <input type="text" class="form-control" id="name" name="name" value="{{ $infrastructure->name }}" required autofocus>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="address">Alamat</label>
-                                                                    <input type="text" class="form-control" id="address" name="address" placeholder="Alamat" required value="{{ $infrastructure->address }}">
+                                                                    <input type="text" class="form-control" id="address" name="address" value="{{ $infrastructure->address }}" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="year">Tahun Pengerjaan</label>
-                                                                    <input type="text" class="form-control" id="year" name="year" placeholder="Tahun Pengerjaan" required value="{{ $infrastructure->year }}">
+                                                                    <input type="text" class="form-control" id="year" name="year" value="{{ $infrastructure->year }}" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="duration">Lama Pengerjaan</label>
-                                                                    <input type="text" class="form-control" id="duration" name="duration" placeholder="Lama Pengerjaan" required value="{{ $infrastructure->duration }}">
+                                                                    <input type="text" class="form-control" id="duration" name="duration" value="{{ $infrastructure->duration }}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="long">Kordinat Long</label>
+                                                                    <input type="text" class="form-control" id="long" name="long" value="{{ $infrastructure->long }}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="lat">Kordinat Lat</label>
+                                                                    <input type="text" class="form-control" id="lat" name="lat" value="{{ $infrastructure->lat }}" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="image">Gambar Infrastruktur</label>
@@ -174,23 +185,13 @@
                                                                     <label for="">Bidang</label>
                                                                     <select name="sector_id" id="sector_id" class="form-control">
                                                                         @foreach ($sectors as $sector)
-                                                                        <option value="{{ $sector->id }}" {{ ($infrastructure->sector_id == $sector->id) ? 'selected' : '' }}>{{ $sector->name }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="">Bidang</label>
-                                                                    <select name="type_id" id="type_id" class="form-control">
-                                                                        @foreach ($types as $type)
-                                                                        <option value="{{ $type->id }}" {{ ($infrastructure->config_id == $type->id) ? 'selected' : '' }}>{{ $type->value }}</option>
+                                                                            <option value="{{ $sector->id }}" {{ ($sector->id == $infrastructure->sector_id) ? 'selected' : '' }}>{{ $sector->name }}</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="">Deskripsi</label>
-                                                                    <textarea id="description" name="description" class="description_">
-                                                                        {{ $infrastructure->description }}
-                                                                    </textarea>
+                                                                    <textarea class="form-control" id="description" name="description" rows="3" required>{{ $infrastructure->description }}</textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer justify-content-between">
@@ -210,7 +211,7 @@
                                             <div class="modal fade" id="delete-infrastructure-{{ $infrastructure->id }}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
-                                                        <form action="/admin/infrastructure/{{ $infrastructure->id }}" method="post">
+                                                        <form action="/admin/infrastructure/list/{{ $infrastructure->id }}" method="post">
                                                             @method('delete')
                                                             @csrf
                                                             <div class="modal-header">

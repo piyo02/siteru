@@ -23,7 +23,14 @@
         <ul>
           <li><a class="nav-link scrollto {{ Request::is("/") ? 'active' : '' }}" href="/">Beranda</a></li>
           <li><a class="nav-link scrollto {{ Request::is("profil") ? 'active' : '' }}" href="/profil">Profil</a></li>
-          <li><a class="nav-link scrollto {{ Request::is("jendela-infrastruktur") ? 'active' : '' }}" href="/jendela-infrastruktur">Jendela Infrastruktur</a></li>
+          <li class="dropdown"><a href="#"><span>Jendela Infrastruktur</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              @foreach ($configs as $config)
+              <li> <a href="/jendela-infrastruktur/{{ $config->field }}">{{ $config->value }}</a></li>
+              @endforeach
+            </ul>
+          </li>
+          {{-- <li><a class="nav-link scrollto {{ Request::is("jendela-infrastruktur") ? 'active' : '' }}" href="/jendela-infrastruktur">Jendela Infrastruktur</a></li> --}}
           <li class="dropdown"><a href="#"><span>Organisasi</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
                 @foreach ($sectors as $sector)

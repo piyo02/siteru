@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Config;
 use App\Models\Sector;
 use Illuminate\Http\Request;
 use App\Models\Infrastructure;
@@ -15,11 +16,25 @@ class InfrastructureController extends Controller
      */
     public function index()
     {
+        $types = Config::where('shortcode', 'like', 'TP-INF')->get();
         $infrastructures = Infrastructure::latest()->paginate(10);
         $sectors = Sector::all();
         return view('pages.infrastructures.index', [
             'page' => 'Infrastruktur',
             'infrastructures' => $infrastructures,
+            'sectors' => $sectors,
+            'types' => $types,
+        ]);
+    }
+
+    public function create()
+    {
+        $types = Config::where('shortcode', 'like', 'TP-INF')->get();
+        $sectors = Sector::all();
+        return view('pages.infrastructures.form', [
+            'page' => 'Infrastruktur',
+            'action' => '/admin/infrastructure/',
+            'types' => $types,
             'sectors' => $sectors,
         ]);
     }
@@ -37,8 +52,6 @@ class InfrastructureController extends Controller
             'address' => 'required',
             'year' => 'required',
             'duration' => 'required',
-            'long' => 'required',
-            'lat' => 'required',
             'description' => 'required',
         ]);
 
@@ -47,9 +60,20 @@ class InfrastructureController extends Controller
         }
 
         $validatedData['sector_id'] = $request->sector_id;
+        $validatedData['config_id'] = $request->type_id;
 
         Infrastructure::create($validatedData);
-        return redirect('/admin/master/infrastructure')->with('success', 'Berhasil');
+        return redirect('/admin/infrastructure')->with('success', 'Berhasil');
+    }
+
+    public function edit(Infrastructure $infrastructure)
+    {
+        return view('pages.infrastructures.form', [
+            'page' => 'Edit Infrastruktur',
+            'news' => $news,
+            'action' => '/admin/publication/news/' . $news->id,
+            'news_content' => file_get_contents(\storage_path('app/'.$news->file)),
+        ]);
     }
 
     /**
@@ -66,20 +90,20 @@ class InfrastructureController extends Controller
             'address' => 'required',
             'year' => 'required',
             'duration' => 'required',
-            'long' => 'required',
-            'lat' => 'required',
             'description' => 'required',
         ]);
 
         if( $request->file('image') ){
             $validatedData['image'] = $request->file('image')->store('images/publish/infrasctructures');
         }
-        $validatedData['sector_id'] = $request->sector_id;
 
+        $validatedData['sector_id'] = $request->sector_id;
+        $validatedData['config_id'] = $request->type_id;
+        
         Infrastructure::where('id', $infrastructure->id)
             ->update($validatedData);
         
-        return redirect('/admin/master/infrastructure')->with('success', 'Berhasil');
+        return redirect('/admin/infrastructure')->with('success', 'Berhasil');
     }
 
     /**
@@ -91,6 +115,6 @@ class InfrastructureController extends Controller
     public function destroy(Infrastructure $infrastructure)
     {
         Infrastructure::destroy($infrastructure->id);
-        return redirect('/admin/master/infrastructure/')->with('success', 'Berhasil');
+        return redirect('/admin/infrastructure/')->with('success', 'Berhasil');
     }
 }

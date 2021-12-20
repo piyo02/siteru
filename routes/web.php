@@ -38,7 +38,7 @@ use App\Http\Controllers\ViolationLetterController;
 Route::get('/', [GuestController::class, 'index']);
 Route::get('/publikasi/kebijakan/download/{policy}', [GuestController::class, 'download']);
 Route::get('/profil', [GuestController::class, 'profile']);
-Route::get('/jendela-infrastruktur', [GuestController::class, 'infrasctructure']);
+Route::get('/jendela-infrastruktur/{slug}', [GuestController::class, 'infrastructure']);
 Route::get('/organisasi/{slug}', [GuestController::class, 'sector']);
 Route::get('/publikasi/berita', [GuestController::class, 'news']);
 Route::get('/publikasi/berita/{slug}', [GuestController::class, 'show_news']);
@@ -80,6 +80,8 @@ Route::middleware([Authenticate::class])->group(function() {
     Route::resource('/admin/publication/galleries', GalleryController::class)->middleware('role.usector');
     Route::resource('/admin/publication/policies', PolicyController::class)->middleware('role.usector');
 
+    Route::get('/admin/infrastructure/type', [ConfigController::class, 'infrastructure_type'])->middleware('role.usector');
+
     // master
     Route::post('/admin/master/regions', [TeamController::class, 'store_region'])->middleware('role.uadmin');
     Route::put('/admin/master/regions/{region}', [TeamController::class, 'update_region'])->middleware('role.uadmin');
@@ -90,12 +92,11 @@ Route::middleware([Authenticate::class])->group(function() {
     Route::put('/admin/master/coordinates/{regionCoordinate}', [TeamController::class, 'update_coordinate'])->middleware('role.uadmin');
     Route::delete('/admin/master/coordinates/{regionCoordinate}', [TeamController::class, 'destroy_coordinate'])->middleware('role.uadmin');
 
-    Route::resource('/admin/master/infrastructure', InfrastructureController::class)->middleware('role.uadmin');
+    Route::resource('/admin/infrastructure', InfrastructureController::class)->middleware('role.uadmin');
     Route::resource('/admin/master/roles', RoleController::class)->middleware('role.admin');
     Route::resource('/admin/master/users', UserController::class)->middleware('role.uadmin');
     Route::resource('/admin/master/teams', TeamController::class)->middleware('role.uadmin');
-    Route::get('/admin/master/configs', [ConfigController::class, 'index'])->middleware('role.uadmin');
-    Route::put('/admin/master/configs/{config}', [ConfigController::class, 'update'])->middleware('role.uadmin');
+    Route::resource('/admin/master/configs', ConfigController::class)->middleware('role.uadmin');
     Route::resource('/admin/maps', MapController::class)->middleware('role.uadmin');
 
     Route::get('/admin/master/contacts', [ContactTypeController::class, 'index'])->middleware('role.admin');

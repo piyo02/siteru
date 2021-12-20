@@ -59,6 +59,30 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">Infrastruktur</li>
+                <li class="nav-item {{ Request::is('admin/infrastructure*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('admin/infrastructure*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-monument"></i>
+                        <p>
+                            Infrastruktur
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href={{ url("/admin/infrastructure") }} class="nav-link {{ Request::is("admin/infrastructure") ? 'active' : '' }}">
+                                <i class="fas fa-monument nav-icon"></i>
+                                <p>Data</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href={{ url("/admin/infrastructure/type") }} class="nav-link {{ Request::is("admin/infrastructure/type*") ? 'active' : '' }}">
+                                <i class="far fa-check-square nav-icon"></i>
+                                <p>Jenis</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 @endusector
                 {{-- <li class="nav-item">
                     <a href={{ url("/admin/complains") }} class="nav-link {{ Request::is("admin/complains*") ? 'active' : '' }}">
@@ -85,12 +109,6 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href={{ url("/admin/master/infrastructure") }} class="nav-link {{ Request::is("admin/master/infrastructure*") ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Infrastruktur</p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a href={{ url("/admin/master/users") }} class="nav-link {{ Request::is("admin/master/users*") ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
@@ -125,12 +143,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href={{ url("/admin/maps") }} class="nav-link {{ Request::is("admin/maps*") ? 'active' : '' }}">
                         <i class="fas fa-map nav-icon"></i>
                         <p>Peta</p>
                     </a>
-                </li>
+                </li> --}}
                 @enduadmin
             </ul>
         </nav>

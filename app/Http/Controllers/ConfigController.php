@@ -26,6 +26,7 @@ class ConfigController extends Controller
 
         $slides = Config::where('shortcode', 'like', 'SLD%')->get();
         $videos = Config::where('shortcode', 'like', 'VD')->get();
+        $faqs = Config::where('shortcode', 'like', 'FAQ')->get();
         return view('pages.configs.index', [
             'page'              => 'Master Configuration',
             'name'              => $name,
@@ -40,11 +41,41 @@ class ConfigController extends Controller
             'str_org'           => $str_org,
             'slides'            => $slides,
             'videos'            => $videos,
+            'faqs'            => $faqs,
         ]); 
+    }
+
+    public function store(Request $request)
+    {
+        $path = '/admin/master/configs';
+        $type = $request->type;
+        if( $type == 'faq' ){
+            $validatedData['shortcode'] = 'FAQ';
+            $validatedData['value'] = $request->value;
+            $validatedData['field'] = $request->field;
+        } else if( $type == 'type' ){
+            $validatedData['shortcode'] = 'TP-INF';
+            $validatedData['value'] = $request->value;
+            $validatedData['field'] = \strtolower($request->value);
+            $path = '/admin/infrastructure/type';
+    }
+
+        if( isset( $validatedData ) && $validatedData != NULL ){
+            Config::create($validatedData);
+            $status = 'success';
+            $message = 'Berhasil';
+        } else {
+            $status = 'error';
+            $message = 'Gagal';
+        }
+
+        
+        return redirect($path)->with($status, $message);
     }
 
     public function update(Request $request, Config $config)
     {
+        $path = '/admin/master/configs';
         $type = $request->type;
         if( $type == 'editor' ){
             if( Storage::disk('local')->put( $config->value, $request->value ) ){
@@ -59,7 +90,15 @@ class ConfigController extends Controller
         } else if( $type == 'video' ){
             $validatedData['value'] = $request->value;
             $validatedData['field'] = $request->field;
+        } else if( $type == 'faq' ){
+            $validatedData['value'] = $request->value;
+            $validatedData['field'] = $request->field;
+        } else if( $type == 'type' ){
+            $path = '/admin/infrastructure/type';
+            $validatedData['value'] = $request->value;
+            // $validatedData['field'] = $request->field;
         }
+        
 
         if( isset( $validatedData ) && $validatedData != NULL ){
             Config::where('id', $config->id)
@@ -72,6 +111,22 @@ class ConfigController extends Controller
         }
 
         
-        return redirect('/admin/master/configs')->with($status, $message);
+        return redirect($path)->with($status, $message);
+    }
+
+    public function destroy(Config $config)
+    {
+        Config::destroy($config->id);
+        $path = ($config->shortcode == 'TP-INF') ? '/admin/infrastructure/type' : '/admin/master/configs/';
+        return redirect($path)->with('success', 'Berhasil');
+    }
+
+    public function infrastructure_type()
+    {
+        $types = Config::where('shortcode', 'like', 'TP-INF')->get();
+        return view('pages.infrastructures.type', [
+            'page'  => 'Tipe Infrastuktur',
+            'types' => $types,
+        ]);
     }
 }

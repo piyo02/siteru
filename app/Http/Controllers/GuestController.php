@@ -8,6 +8,7 @@ use App\Models\Policy;
 use App\Models\Sector;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use App\Models\Infrastructure;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
@@ -19,17 +20,21 @@ class GuestController extends Controller
         $newses = News::latest()->take(3)->get();
         $fav_news = News::orderBy('seen', 'desc')->first();
         $galleries = Gallery::latest()->take(6)->get();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
         $sectors = Sector::all();
 
         $videos = Config::where('shortcode', 'VD')->get();
+        $faqs = Config::where('shortcode', 'FAQ')->get();
 
         return view('guest.v3.index', [
             'galleries' => $galleries,
             'newses' => $newses,
             'videos' => $videos,
+            'faqs' => $faqs,
             'sectors' => $sectors,
             'slides' => $slides,
             'fav_news' => $fav_news,
+            'configs' => $configs,
         ]);
     }
     
@@ -47,20 +52,29 @@ class GuestController extends Controller
         $str_org = Config::where('shortcode', 'STR-ORG')->first();
         
         $sectors = Sector::all();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
         return view('guest.v3.profile', [
             'sectors' => $sectors,
             'vs_ms_content' => $vs_ms_content,
             'tgs_fgs_content' => $tgs_fgs_content,
             'mt_lbg_content' => $mt_lbg_content,
             'str_org' => $str_org,
+            'configs' => $configs,
         ]);
     }
 
-    public function infrasctructure()
+    public function infrastructure($slug)
     {
         $sectors = Sector::all();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
+        
+        $config = Config::where('field', $slug)->first();
+        $infrastructures = Infrastructure::where('config_id', $config->id)->get();
+        
         return view('guest.v3.infrastructure', [
+            'infrastructures' => $infrastructures,
             'sectors' => $sectors,
+            'configs' => $configs,
         ]);
     }
 
@@ -69,6 +83,7 @@ class GuestController extends Controller
         $sectors = Sector::all();
         $sector = Sector::where('slug', $slug)->first();
         $contacts = $sector->sector_contacts()->get();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
 
         try {
             $program    = Storage::disk('local')->get($sector->program);
@@ -86,6 +101,7 @@ class GuestController extends Controller
             'program'   => $program,
             'job'       => $job,
             'purpose'   => $purpose,
+            'configs' => $configs,
         ]);
     }
 
@@ -93,9 +109,11 @@ class GuestController extends Controller
     {
         $newses = News::paginate(9);
         $sectors = Sector::all();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
         return view('guest.v3.news', [
             'newses' => $newses,
             'sectors' => $sectors,
+            'configs' => $configs,
         ]);
     }
     
@@ -103,6 +121,7 @@ class GuestController extends Controller
     {
         $news = News::where('slug', $slug)->first();
         $sectors = Sector::all();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
         try {
             $news_content = Storage::disk('local')->get($news->file);
         } catch (\Exception $exception) {
@@ -112,6 +131,7 @@ class GuestController extends Controller
             'news' => $news,
             'news_content' => $news_content,
             'sectors' => $sectors,
+            'configs' => $configs,
         ]);
         // dd($slug);
     }
@@ -120,9 +140,11 @@ class GuestController extends Controller
     {
         $galleries = Gallery::take(9)->paginate();
         $sectors = Sector::all();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
         return view('guest.v3.galleries', [
             'sectors' => $sectors,
             'galleries' => $galleries,
+            'configs' => $configs,
         ]);
     }
 
@@ -130,6 +152,7 @@ class GuestController extends Controller
     {
         $gallery = Gallery::where('slug', $slug)->first();
         $sectors = Sector::all();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
         try {
             $gallery_content = Storage::disk('local')->get($gallery->file);
         } catch (\Exception $exception) {
@@ -139,6 +162,7 @@ class GuestController extends Controller
             'gallery' => $gallery,
             'gallery_content' => $gallery_content,
             'sectors' => $sectors,
+            'configs' => $configs,
         ]);
     }
     
@@ -146,17 +170,21 @@ class GuestController extends Controller
     {
         $policies = Policy::all();
         $sectors = Sector::all();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
         return view('guest.v3.policies', [
             'sectors' => $sectors,
             'policies' => $policies,
+            'configs' => $configs,
         ]);
     }
 
     public function maps()
     {
         $sectors = Sector::all();
+        $configs = Config::where('shortcode', 'like', 'TP-INF')->get();
         return view('guest.v3.maps', [
-            'sectors' => $sectors
+            'sectors' => $sectors,
+            'configs' => $configs,
         ]);
     }
 
